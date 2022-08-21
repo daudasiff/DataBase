@@ -12,9 +12,10 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     DataBaseHelper myDb;
-    EditText editName, editSurname, editMarks;
+    EditText editName, editSurname, editMarks, editTextId;
     Button btnAddData;
     Button btnviewAll;
+    Button btnviewUpdate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,10 +25,26 @@ public class MainActivity extends AppCompatActivity {
         editName = (EditText) findViewById(R.id.editText_name);
         editSurname = (EditText) findViewById(R.id.editText_surname);
         editMarks = (EditText) findViewById(R.id.editText_Marks);
+        editTextId = (EditText) findViewById(R.id.editText_ID);
         btnAddData = (Button) findViewById(R.id.button_add);
-        btnviewAll = (Button) findViewById(R.id.button_vall)
+        btnviewAll = (Button) findViewById(R.id.button_vall);
+        btnviewUpdate = (Button) findViewById(R.id.button_update);
         AddData();
         viewAll();
+        UpdateData();
+    }
+    public void UpdateData(){
+        btnviewUpdate.setOnClickListener(
+                new View.OnClickListener(){
+                    @Override
+                    public void onClick (View v){
+                        boolean isUpdated = myDb.updateData(editTextId.getText().toString(), editName.getText().toString(), editSurname.getText().toString(), editMarks.getText().toString());
+                  if(isUpdated == true)Toast.makeText(MainActivity.this, "Data Updated", Toast.LENGTH_LONG).show();
+                  else
+                      Toast.makeText(MainActivity.this, "Data not Updated", Toast.LENGTH_LONG).show();
+                    }
+                }
+        );
     }
     public void AddData(){
         btnAddData.setOnClickListener(
@@ -37,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
                        boolean isInserted = myDb.insertData(editName.getText().toString(),
                                 editSurname.getText().toString(),
                                 editMarks.getText().toString());
-                       if (isInserted = true)
+                       if (isInserted == true)
                            Toast.makeText(MainActivity.this, "Data Inserted", Toast.LENGTH_LONG).show();
                        else
                            Toast.makeText(MainActivity.this, "Data not Inserted", Toast.LENGTH_LONG).show();
