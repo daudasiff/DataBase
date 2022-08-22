@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick (View v){
                         Cursor res = myDb.getAllData();
                         if(res.getCount() == 0){
-                            showMessage("Error", "No Data Found")
+                            showMessage("Error", "No Data Found");
                         }
                         StringBuffer buffer = new StringBuffer();
                         while(res.moveToNext()){
