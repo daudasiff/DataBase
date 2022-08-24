@@ -18,12 +18,11 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     public DataBaseHelper(@Nullable Context context) {
         super(context, DATABASE_NAME, null, 1);
-        SQLiteDatabase db = this.getWritableDatabase();
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create table" + TABLE_NAME+ "(ID INTEGER PRIMARY KEY AUTOINCREMENT, NAME TEXT, SURNAME TEXT, MARKS INTEGER)");
+        db.execSQL(" create table" + TABLE_NAME+ "(ID INTEGER PRIMARY KEY AUTOINCREMENT, NAME TEXT, SURNAME TEXT, MARKS INTEGER)");
     }
 
     @Override
@@ -38,15 +37,11 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         contentValues.put(COL_3, surname);
         contentValues.put(COL_4, marks);
         long result = db.insert (TABLE_NAME, null, contentValues);
-        if (result == -1)
-            return false;
-        else
-            return true;
+        return result != -1;
     }
     public Cursor getAllData(){
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor res = db.rawQuery("select * from " +TABLE_NAME, null);
-        return res;
+        return db.rawQuery("select * from " +TABLE_NAME, null);
     }
     public boolean updateData(String id, String name, String surname, String marks){
         SQLiteDatabase db = this.getWritableDatabase();
