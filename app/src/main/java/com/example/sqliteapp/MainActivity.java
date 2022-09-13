@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        myDb=new DataBaseHelper(this);
+        myDb = new DataBaseHelper(this);
         editName = (EditText) findViewById(R.id.editText_name);
         editSurname = (EditText) findViewById(R.id.editText_surname);
         editMarks = (EditText) findViewById(R.id.editText_Marks);
